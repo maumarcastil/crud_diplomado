@@ -65,6 +65,7 @@ const TableList = ({ users, setUsers }: any) => {
         <Table
           columns={columns}
           dataSource={users}
+          rowKey={(record: any) => record.id}
           style={{
             width: '100%',
           }}
