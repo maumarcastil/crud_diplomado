@@ -1,0 +1,22 @@
+.container{
+    width: 90%;
+    margin: 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container > div{
+    width: 100%;    
+}
+
+.title{
+    display: flex;
+    justify-content: center;
+}
+
+
+.btn{
+    width: 100%;
+}
+
