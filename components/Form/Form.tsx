@@ -1,10 +1,14 @@
 import React from 'react'
 import styles from './FormRegister.module.css'
-import { Form, Input, Checkbox, Button } from 'antd'
+import { Form, Input,Button } from 'antd'
+import { get, save } from '../../Firebase/service'
 
-const FormRegister = () => {
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+const FormRegister = ({ setUsers }: any) => {
+
+  const onFinish = async (values: any) => {
+    await save(values).then(async () => {
+      setUsers(await get())
+    })
   }
 
   return (
@@ -51,10 +55,7 @@ const FormRegister = () => {
                 },
               ]}
             >
-              <Input
-                type="number"
-                placeholder="Ingresa tu teléfono"
-              />
+              <Input type="number" placeholder="Ingresa tu teléfono" />
             </Form.Item>
 
             <Form.Item
@@ -74,7 +75,6 @@ const FormRegister = () => {
                 {
                   required: true,
                   message: 'Por favor ingresa tu correo!',
-                  type: 'email',
                 },
               ]}
             >

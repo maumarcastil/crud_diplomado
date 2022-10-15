@@ -11,74 +11,41 @@ interface DataType {
   tags: string[]
 }
 
-const TableList = () => {
-  const data: DataType[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
-    },
-  ]
+const TableList = ({ users }: any) => {
+
 
   const columns: ColumnsType<DataType> = [
     {
-      title: 'Name',
+      title: 'Nombre',
       dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
+      title: 'Apellidos',
+      dataIndex: 'lastName',
+      key: 'name',
+    },
+    {
+      title: 'Telefono',
+      dataIndex: 'tel',
       key: 'age',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
+      title: 'Edad',
+      dataIndex: 'age',
       key: 'address',
     },
     {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
-      render: (_, { tags }) => (
-        <>
-          {tags.map((tag) => {
-            let color = tag.length > 5 ? 'geekblue' : 'green'
-            if (tag === 'loser') {
-              color = 'volcano'
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            )
-          })}
-        </>
-      ),
+      title: 'Correo',
+      dataIndex: 'email',
+      key: 'address',
     },
+
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
           <a>Delete</a>
         </Space>
       ),
@@ -90,10 +57,11 @@ const TableList = () => {
       <div className={styles.container}>
         <Table
           columns={columns}
-          dataSource={data}
+          dataSource={users}
           style={{
             width: '100%',
           }}
+          loading={users.length === 0}
         />
       </div>
     </>
