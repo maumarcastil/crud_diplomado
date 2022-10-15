@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       const data: any = await get()
       setUsers(data)
     })()
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
           backgroundColor: '#edf1f3',
         }}
       >
-        <TableList users={users}  />
+        <TableList users={users} setUsers={setUsers} />
       </div>
     </div>
   )

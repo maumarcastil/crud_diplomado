@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Tag, Space } from 'antd'
 import type { ColumnsType } from 'antd/es/table'
 import styles from './Table.module.css'
+import { deleted, get } from '../../Firebase/service'
 
 interface DataType {
   key: string
@@ -11,8 +12,14 @@ interface DataType {
   tags: string[]
 }
 
-const TableList = ({ users }: any) => {
-
+const TableList = ({ users, setUsers }: any) => {
+  const handleDeleted = async (id: string) => {
+    if (id)
+      await deleted(id).then(async () => {
+        const data: any = await get()
+        setUsers(data)
+      })
+  }
 
   const columns: ColumnsType<DataType> = [
     {
@@ -44,9 +51,9 @@ const TableList = ({ users }: any) => {
     {
       title: 'Action',
       key: 'action',
-      render: (_, record) => (
+      render: (_, record: any) => (
         <Space size="middle">
-          <a>Delete</a>
+          <a onClick={() => handleDeleted(record.id)}>Delete</a>
         </Space>
       ),
     },

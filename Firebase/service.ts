@@ -3,7 +3,6 @@ import {
   collection,
   addDoc,
   getDocs,
-  onSnapshot,
   doc,
   query,
   where,
@@ -37,4 +36,15 @@ const get = async (callback?: any) => {
   }
 };
 
-export { save, get };
+const deleted = async (id: string, callback?: any) => {
+  try {
+    const element = doc(db, "users", id);
+    await updateDoc(element, {
+      status: "deleted",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { save, get, deleted };
