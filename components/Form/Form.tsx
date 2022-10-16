@@ -1,13 +1,15 @@
 import React from 'react'
 import styles from './FormRegister.module.css'
-import { Form, Input,Button } from 'antd'
+import { Form, Input, Button } from 'antd'
 import { get, save } from '../../Firebase/service'
 
 const FormRegister = ({ setUsers }: any) => {
+  const [form] = Form.useForm()
 
   const onFinish = async (values: any) => {
     await save(values).then(async () => {
       setUsers(await get())
+      form.resetFields()
     })
   }
 
@@ -19,6 +21,7 @@ const FormRegister = ({ setUsers }: any) => {
         </div>
         <div>
           <Form
+            form={form}
             layout="vertical"
             name="normal_login"
             className="login-form"
